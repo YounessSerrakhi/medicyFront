@@ -33,7 +33,7 @@ function Register(){
     api.post('api/register', formData, {
     })
       .then(response => {
-        console.log(response.data.message);
+        alert(response.data.message);
       })
       .catch(error => {
         console.log(error);

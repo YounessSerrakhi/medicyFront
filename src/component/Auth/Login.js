@@ -8,7 +8,7 @@ function Login() {
   
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
-const { login,api} = useAuth();
+const { login,api,token} = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,11 +18,14 @@ const { login,api} = useAuth();
     formData.append('password', password);
 
 
-
+    api.defaults.headers['Authorization'] = `Bearer ${token}`;
     api.post('api/login', formData, {
     })
       .then(response => {
         login(response);
+        alert(response.data.message);
+        setEmail("");
+        setPassword("");
       })
       .catch(error => {
         console.log(error);

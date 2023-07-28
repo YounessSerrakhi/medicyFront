@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useRef } from 'react';
+import React, { createContext, useContext, useState} from 'react';
 import axios from 'axios';
 
 const AuthContext = createContext();
@@ -9,25 +9,24 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const tokenRef = useRef('');
+  const [token,setToken]=useState('');
   const [userData, setUserData] = useState({ name: '', email: '' });
   const api = axios.create({
     baseURL: 'http://127.0.0.1:8000',
     headers: {
       'X-Requested-With': 'XMLHttpRequest',
       'Accept': 'application/json',
-      'Authorization':`Bearer ${tokenRef.current}`
     },
     withCredentials: true,
   });
 
 
   const login = (response) => {
-    tokenRef.current = response.data.token;
+    setToken(response.data.token);
     setIsAuthenticated(true);
-   // api.defaults.headers['Authorization'] = `Bearer ${tokenRef.current}`;
+    api.defaults.headers['Authorization'] = `Bearer ${response.data.token}`;
     api.get("api/user").then(response=>{
-      setUserData({
+      setUserData({...userData,
         name: response.data.name,
         email: response.data.email,
       })}).catch(error => {
@@ -36,12 +35,12 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => {
-    tokenRef.current = '';
+    setToken('');
     setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, token: tokenRef.current, login, logout, userData, api }}>
+    <AuthContext.Provider value={{ isAuthenticated, token, login, logout, userData, api }}>
       {children}
     </AuthContext.Provider>
   );

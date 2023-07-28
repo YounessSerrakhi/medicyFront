@@ -6,7 +6,7 @@ import logo from '../imgs/logo.png';
 
 function Navbar() {
   const [showBrand, setShowBrand] = useState(false);
-  const { isAuthenticated,logout,userData,api} = useAuth();
+  const { isAuthenticated,logout,userData,api,token} = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,8 +22,12 @@ function Navbar() {
 
   const handleLogout =(event) => {
     event.preventDefault();
-    api.post('api/logout').then(response => {console.log(response);});
-    logout();
+    api.defaults.headers['Authorization'] = `Bearer ${token}`;
+    api.post('api/logout').then(response => {
+      console.log(response);
+      logout();
+      alert(response.data.message);
+    });
   };
 
 
@@ -48,12 +52,12 @@ function Navbar() {
         <div className="collapse mt-sm-20 navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-            <a href="/index#Home" className="nav-link">
+            <a href="/#home" className="nav-link">
                 Home
               </a>
             </li>
             <li className="nav-item">
-              <a href="#medicines" className="nav-link">
+              <a href="/#medicines" className="nav-link">
                 Medicines
               </a>
             </li>
@@ -72,7 +76,7 @@ function Navbar() {
           </ul>
           <ul className="navbar-nav ml-auto">
           <li className="nav-item last-item">
-              <a href="#contact" className="nav-link">
+              <a href="/#contact" className="nav-link">
                 Contact
               </a>
             </li>
