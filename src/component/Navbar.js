@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from "react-router-dom";
+import Cookies from 'js-cookie';
 import { Dropdown } from 'react-bootstrap';
 import { useAuth } from '../Contexts/AuthContext';
 import logo from '../imgs/logo.png';
 
 function Navbar() {
   const [showBrand, setShowBrand] = useState(false);
-  const { isAuthenticated,logout,userData,api,token} = useAuth();
+  const {logout,api} = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,7 +23,7 @@ function Navbar() {
 
   const handleLogout =(event) => {
     event.preventDefault();
-    api.defaults.headers['Authorization'] = `Bearer ${token}`;
+    api.defaults.headers['Authorization'] = `Bearer ${Cookies.get('token')}`;
     api.post('api/logout').then(response => {
       console.log(response);
       logout();
@@ -80,7 +81,7 @@ function Navbar() {
                 Contact
               </a>
             </li>
-            {!isAuthenticated && ( // Render login and register links if not authenticated
+            {!(Cookies.get('token')!==undefined) && ( // Render login and register links if not authenticated
               <>
                 <li className="nav-item">
                   <Link to='/login' className="nav-link" >
@@ -94,11 +95,11 @@ function Navbar() {
                 </li>
               </>
             )}
-            {isAuthenticated && (
+            {(Cookies.get('token')!==undefined) && (
               <>
               <Dropdown>
               <Dropdown.Toggle variant="outline-secondary" id="dropdownMenuButton">
-                {userData.name}
+                {Cookies.get('userName')}
               </Dropdown.Toggle>
               <Dropdown.Menu className="form">
                   <a href="http://127.0.0.1:8000/logout" onClick={handleLogout}>Logout</a>

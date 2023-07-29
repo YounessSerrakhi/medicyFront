@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState} from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+
 
 const AuthContext = createContext();
 
@@ -9,8 +11,6 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [token,setToken]=useState('');
-  const [userData, setUserData] = useState({ name: '', email: '' });
   const api = axios.create({
     baseURL: 'http://127.0.0.1:8000',
     headers: {
@@ -22,25 +22,25 @@ export function AuthProvider({ children }) {
 
 
   const login = (response) => {
-    setToken(response.data.token);
+    Cookies.set('token', `${response.data.token}`, { expires: 7 });
     setIsAuthenticated(true);
-    api.defaults.headers['Authorization'] = `Bearer ${response.data.token}`;
+    api.defaults.headers['Authorization'] = `Bearer ${Cookies.get('token')}`;
     api.get("api/user").then(response=>{
-      setUserData({...userData,
-        name: response.data.name,
-        email: response.data.email,
-      })}).catch(error => {
+      Cookies.set('userName', `${response.data.name}`, { expires: 7 });
+      Cookies.set('userEmail', `${response.data.email}`, { expires: 7 });
+      }).catch(error => {
       console.log(error);
     });
   };
 
   const logout = () => {
-    setToken('');
     setIsAuthenticated(false);
+    Cookies.remove('token');
+
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, token, login, logout, userData, api }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, api }}>
       {children}
     </AuthContext.Provider>
   );

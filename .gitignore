@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+
+#ignore style, cause i will note change it and i dont want css to apair dominent in my github project
+*.css
 # dependencies
 /node_modules
 /.pnp

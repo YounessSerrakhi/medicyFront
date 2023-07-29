@@ -3,12 +3,13 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import {Link} from "react-router-dom";
 import { MDBContainer, MDBInput, MDBCheckbox, MDBBtn } from 'mdb-react-ui-kit';
 import { useAuth } from '../../Contexts/AuthContext';
+import Cookies from 'js-cookie';
 
 function Login() {
   
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
-const { login,api,token} = useAuth();
+const { login,api} = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,7 +19,7 @@ const { login,api,token} = useAuth();
     formData.append('password', password);
 
 
-    api.defaults.headers['Authorization'] = `Bearer ${token}`;
+    api.defaults.headers['Authorization'] = `Bearer ${Cookies.get('token')}`;
     api.post('api/login', formData, {
     })
       .then(response => {
