@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Dropdown, Form, Button } from 'react-bootstrap';
 import { useAuth } from '../Contexts/AuthContext';
+import Cookies from 'js-cookie';
 
 function MyDropdown() {
   const {api} = useAuth();
@@ -16,6 +17,7 @@ function MyDropdown() {
 
   const sendDemande = (event) => {
     event.preventDefault();
+    api.defaults.headers['Authorization'] = `Bearer ${Cookies.get('token')}`;
     api.post('api/medicines/demande', formData)
       .then((response) => {
         alert(response.data.message);
