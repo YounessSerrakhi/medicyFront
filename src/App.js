@@ -22,7 +22,7 @@ const [alertShown, setAlertShown] = useState(false);
     <BrowserRouter>
     <AuthProvider>
     <Routes>
-      <Route path='/' element={<Layout />}>
+      <Route path='/medicyFront/' element={<Layout />}>
         <Route index element={<Home />} />
         <Route path='login' element={<Login />} />
         <Route path='register' element={<Register />} />
