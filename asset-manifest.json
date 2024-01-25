@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/medicyfront/static/css/main.b4c88a92.css",
+    "main.js": "/medicyfront/static/js/main.d6950999.js",
+    "static/js/787.e1896324.chunk.js": "/medicyfront/static/js/787.e1896324.chunk.js",
+    "static/media/header.jpg": "/medicyfront/static/media/header.2d9cd1cf2c533d128905.jpg",
+    "static/media/themify.svg?-fvbane": "/medicyfront/static/media/themify.f0fc8c798eac5636249c.svg",
+    "static/media/themify.eot": "/medicyfront/static/media/themify.9bad94440d49256265a5.eot",
+    "static/media/themify.ttf?-fvbane": "/medicyfront/static/media/themify.eda8b94308c6f538f04a.ttf",
+    "static/media/themify.woff?-fvbane": "/medicyfront/static/media/themify.29b39089170885ae2967.woff",
+    "static/media/logo.png": "/medicyfront/static/media/logo.667f3d4d1225a183b14d.png",
+    "index.html": "/medicyfront/index.html",
+    "main.b4c88a92.css.map": "/medicyfront/static/css/main.b4c88a92.css.map",
+    "main.d6950999.js.map": "/medicyfront/static/js/main.d6950999.js.map",
+    "787.e1896324.chunk.js.map": "/medicyfront/static/js/787.e1896324.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b4c88a92.css",
+    "static/js/main.d6950999.js"
+  ]
+}
