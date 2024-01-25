@@ -4,11 +4,8 @@ import Footer from '../component/Footer';
 import { useLocation,Outlet } from 'react-router-dom';
 
 function Layout(){
-    const location = useLocation().pathname;
     return<>
-    {location == "/" && (
-        <Header/>
-    )}
+    <Header/>
     <Navbar />  
     <div className='window-size'>
     <Outlet />
