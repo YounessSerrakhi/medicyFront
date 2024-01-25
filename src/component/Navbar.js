@@ -53,12 +53,12 @@ function Navbar() {
         <div className="collapse mt-sm-20 navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-            <a href="/#home" className="nav-link">
-                Home
-              </a>
+            <Link to='/' className="nav-link" >
+                    Home
+                  </Link>
             </li>
             <li className="nav-item">
-              <a href="/#medicines" className="nav-link">
+              <a href="#medicines" className="nav-link">
                 Medicines
               </a>
             </li>
@@ -77,7 +77,7 @@ function Navbar() {
           </ul>
           <ul className="navbar-nav ml-auto">
           <li className="nav-item last-item">
-              <a href="/#contact" className="nav-link">
+              <a href="#contact" className="nav-link">
                 Contact
               </a>
             </li>

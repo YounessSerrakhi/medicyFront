@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState} from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+//import Cookies from 'js-cookie';
 
 
 const AuthContext = createContext();
@@ -22,12 +22,12 @@ export function AuthProvider({ children }) {
 
 
   const login = (response) => {
-    Cookies.set('token', `${response.data.token}`, { expires: 7 });
+    //Cookies.set('token', `${response.data.token}`, { secure: true, sameSite: 'strict',expires: 7 });
     setIsAuthenticated(true);
-    api.defaults.headers['Authorization'] = `Bearer ${Cookies.get('token')}`;
+    //api.defaults.headers['Authorization'] = `Bearer ${Cookies.get('token')}`;
     api.get("api/user").then(response=>{
-      Cookies.set('userName', `${response.data.name}`, { expires: 7 });
-      Cookies.set('userEmail', `${response.data.email}`, { expires: 7 });
+      //Cookies.set('userName', `${response.data.name}`, { expires: 7 });
+      //Cookies.set('userEmail', `${response.data.email}`, { expires: 7 });
       }).catch(error => {
       console.log(error);
     });
@@ -35,7 +35,7 @@ export function AuthProvider({ children }) {
 
   const logout = () => {
     setIsAuthenticated(false);
-    Cookies.remove('token');
+    //Cookies.remove('token');
 
   };
 
